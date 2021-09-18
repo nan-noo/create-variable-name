@@ -9,12 +9,12 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.get('/api/translate', (req, res) => {
+app.post('/api/translate', (req, res) => {
     const apiURL = 'https://openapi.naver.com/v1/papago/n2mt';
     const params = {
-        'source': 'ko',
+        'source': req.body.source,
         'target': 'en',
-        'text': '안녕'
+        'text': req.body.text,
     };
     const headers = {
         'X-Naver-Client-Id': config.client_id,
@@ -28,7 +28,6 @@ app.get('/api/translate', (req, res) => {
 
     request.post(options, (err, response, body) => {
         if(err || response.statusCode != 200) return res.status(response.statusCode).end();
-        console.log(response.body);
         res.writeHead(200, {
             'Content-Type': 'text/json;charset=utf-8'
         });
