@@ -27,8 +27,10 @@ const ResultText = styled.div`
 
 async function papago(query){
     const response = await axios.post('/api/detectLangs', {query});
+    if(response.data.langCode === 'en') return query;
+
     const res = await axios.post('/api/translate', {source: response.data.langCode, text: query});
-    return res.data.message.result;
+    return res.data.message.result.translatedText;
 };
 
 function Form() {
@@ -42,7 +44,7 @@ function Form() {
         setResultText('');
         try{
             const result = await papago(text);
-            setResultText(result.translatedText);
+            setResultText(result);
         }
         catch(e){
             console.log(e);
@@ -55,8 +57,8 @@ function Form() {
     return (
         <>
             <FormBox onSubmit={onSubmit}>
-                <Input value={text} onChange={e => setText(e.target.value)}/>
-                <SubmitBtn placeholder=''>확인</SubmitBtn>
+                <Input placeholder='변수 명을 적어주세요' value={text} onChange={e => setText(e.target.value)}/>
+                <SubmitBtn>확인</SubmitBtn>
             </FormBox>
             {error
                 ? <ResultText>!ERROR!</ResultText>

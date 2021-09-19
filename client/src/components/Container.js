@@ -8,8 +8,8 @@ const ContainerBox = styled.div`
     align-items: center;
 
     background: white;
-    width: 20rem;
-    height: 15rem;
+    width: 50%;
+    height: 20rem;
 
     border-radius: 16px;
     box-shadow: 0 0 12px 0 rgba(255,255,255, .8);
