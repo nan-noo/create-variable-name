@@ -35,4 +35,28 @@ app.post('/api/translate', (req, res) => {
     })
 })
 
+app.post('/api/detectLangs', (req, res) => {
+    const apiURL = 'https://openapi.naver.com/v1/papago/detectLangs';
+    const params = {
+        'query': req.body.query
+    };
+    const headers = {
+        'X-Naver-Client-Id': config.client_id,
+        'X-Naver-Client-Secret': config.client_secret
+    };
+    const options = {
+        url: apiURL,
+        form: params,
+        headers: headers,
+    };
+
+    request.post(options, (err, response, body) => {
+        if(err || response.statusCode != 200) return res.status(response.statusCode).end();
+        res.writeHead(200, {
+            'Content-Type': 'text/json;charset=utf-8'
+        });
+        res.end(body);
+    })
+})
+
 app.listen(port, () => {console.log(`Listening on port ${port}...`)})
