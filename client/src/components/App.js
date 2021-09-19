@@ -5,13 +5,7 @@ import Container from './Container';
 import Form from './Form';
 import GuideButton from './GuideButton';
 
-
-
 function App() {
-  const onClick = () => {
-
-  };
-
   return (
     <div className="App">
       <Container>
