@@ -52,13 +52,12 @@ function Form() {
         setResultText('');
         try{
             const result = await papago(text);
-            setResultText(result);
+            setResultText(result.replace('.', ''));
         }
         catch(e){
             console.log(e);
             setError(e);
         }
-        
         setText('');
     };
 

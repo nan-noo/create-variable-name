@@ -71,6 +71,7 @@ function CaseButtons({error, resultText}) {
             .split(' ')
             .join('_')
             .toLowerCase()
+        
         setQuery(text);
     };
 
