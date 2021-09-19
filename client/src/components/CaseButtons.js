@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import styled from 'styled-components';
 
 const BtnBox = styled.div`
@@ -50,17 +50,21 @@ const ResultText = styled.div`
 
 function CaseButtons({error, resultText}) {
     const [query, setQuery] = useState('');
-    useEffect(() => {
-        setQuery(resultText);
-    }, [resultText])
 
-    const toCamelCase = () => {
-        let text = resultText.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) => {
-            if (+match === 0) return ''; // or if (/\s+/.test(match)) for white spaces
-            return index === 0 ? match.toLowerCase() : match.toUpperCase();
-        })
-        setQuery(text);
-    };
+    const toCamelCase = useCallback(
+        () => {
+            let text = resultText.replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) => {
+                if (+match === 0) return ''; // or if (/\s+/.test(match)) for white spaces
+                return index === 0 ? match.toLowerCase() : match.toUpperCase();
+            })
+            setQuery(text);
+        },
+        [resultText],
+    );
+
+    useEffect(() => {
+        toCamelCase();
+    }, [toCamelCase])
 
     const toSnakeCase = () => {
         let text = resultText.charAt(0).toLowerCase() + resultText.slice(1) // lowercase the first character
