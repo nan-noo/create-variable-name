@@ -39,7 +39,8 @@
       "last 1 safari version"
     ]
   },
-  "homepage": "http://nan-noo.github.io/create-variable-name",
+  "proxy": "https://create-variable-name.herokuapp.com",
+  "homepage": "./",
   "devDependencies": {
     "http-proxy-middleware": "^2.0.1"
   }

@@ -1,13 +1,15 @@
 const express = require('express');
+const cors = require('cors');
 const request = require('request');
 
 const config = require('./config/config');
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cors());
 
 app.post('/api/translate', (req, res) => {
     const apiURL = 'https://openapi.naver.com/v1/papago/n2mt';

@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
+import axios from '../axios';
 
 import CaseButtons from './CaseButtons';
 
@@ -34,10 +34,10 @@ const SubmitBtn = styled.button`
 `;
 
 async function papago(query){
-    const response = await axios.post('/api/detectLangs', {query});
+    const response = await axios.post('api/detectLangs', {query});
     if(response.data.langCode === 'en') return query;
 
-    const res = await axios.post('/api/translate', {source: response.data.langCode, text: query});
+    const res = await axios.post('api/translate', {source: response.data.langCode, text: query});
     return res.data.message.result.translatedText;
 };
 
