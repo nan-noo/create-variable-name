@@ -1,12 +1,27 @@
 # create-variable-name
 nannoo's toy project.   
 detect the language of the sentence and translate it into CamelCase or snake_case (in English)   
-deploy: server-heroku | client-netlify    
+deploy:
+![Generic badge](https://img.shields.io/badge/server-heroku-green.svg)
+![Generic badge](https://img.shields.io/badge/client-netlify-yellow.svg)    
+
 https://create-variable-name.netlify.app
 ***
 React + Node(express)    
 papago api(detect language & translate)    
 https://developers.naver.com/docs/papago/README.md    
+***
+### Start
+1. add 'config.js' file in './server/config/'
+2. export your client_id & client_secret to use Papago api
+  ```JS
+  module.exports = {
+    client_id: "YOUR_CLIENT_ID",
+    client_secret: "YOUR_CLIENT_SECRET"
+}
+  ```
+3. npm install
+4. npm run dev
 ***
 ### modules
 |server|client|
